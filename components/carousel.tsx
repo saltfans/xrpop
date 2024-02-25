@@ -12,12 +12,12 @@ export async function Carousel() {
   const carouselProducts = [...products, ...products, ...products];
 
   return (
-    <div className=" w-full overflow-x-auto pb-6 pt-1">
+    <div className=" w-full overflow-x-auto pb-6 pt-4">
       <ul className="flex animate-carousel gap-4">
         {carouselProducts.map((product, i) => (
           <li
             key={`${product.handle}${i}`}
-            className="relative aspect-square h-[30vh] max-h-[275px] w-2/3 max-w-[475px] flex-none md:w-1/3"
+            className="relative aspect-square h-[34vh] max-h-[275px] w-2/3 max-w-[475px] flex-none md:w-1/4 px-4"
           >
             <Link href={`/product/${product.handle}`} className="relative h-full w-full">
               <GridTileImage
@@ -29,6 +29,7 @@ export async function Carousel() {
                 }}
                 src={product.featuredImage?.url}
                 fill
+                className=''
                 sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
               />
             </Link>
