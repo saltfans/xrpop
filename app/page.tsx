@@ -19,7 +19,9 @@ export default async function HomePage() {
       <Suspense>
         <Carousel />
         <Suspense>
+          <div className='relative'>
           <Footer />
+          </div>
         </Suspense>
       </Suspense>
     </>
