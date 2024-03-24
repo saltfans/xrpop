@@ -32,7 +32,7 @@ export default async function Navbar() {
                   <Link
                     href={item.path}
                     className="text-neutral-500  underline-offset-4 hover:text-black hover:underline dark:text-white dark:hover:text-cyan-400"
-                  >
+                  >7
                     {item.title}
                   </Link>
                 </li>
