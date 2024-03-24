@@ -11,33 +11,17 @@ const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
 const twitterCreator = TWITTER_CREATOR ? ensureStartsWith(TWITTER_CREATOR, '@') : undefined;
 const twitterSite = TWITTER_SITE ? ensureStartsWith(TWITTER_SITE, 'https://') : undefined;
 
-export const metadata = {
-  metadataBase: new URL(baseUrl),
-  title: {
-    default: SITE_NAME!,
-    template: `%s | ${SITE_NAME}`
-  },
-  robots: {
-    follow: true,
-    index: true
-  },
-  ...(twitterCreator &&
-    twitterSite && {
-      twitter: {
-        card: 'summary_large_image',
-        creator: twitterCreator,
-        site: twitterSite
-      }
-    })
-};
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={GeistSans.variable}>
       <body className="bg-neutral-50 text-black selection:bg-teal-300 dark:bg-gray-950 dark:text-white dark:selection:bg-pink-600 dark:selection:text-white">
+        <div className="bg-white z-50 dark:bg-black text-black dark:text-white border-b border-gray-700 text-center py-2">
+          🚚 (NL) Free Shipping on Orders Over €50! Shop now and enjoy complimentary shipping.
+        </div>
         <Navbar />
         <Suspense>
-          <main>{children}</main>
+          <main className='relative'>{children}</main>
         </Suspense>
       </body>
     </html>
