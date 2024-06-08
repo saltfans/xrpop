@@ -1,5 +1,4 @@
 import Grid from 'components/grid';
-import Background from 'components/layout/background';
 import ProductGridItems from 'components/layout/product-grid-items';
 import { defaultSort, sorting } from 'lib/constants';
 import { getProducts } from 'lib/shopify';
@@ -24,7 +23,6 @@ export default async function SearchPage({
 
   return (
     <>
-    <div><Background /></div>
       {searchValue ? (
         <p className="mb-4">
           {products.length === 0
