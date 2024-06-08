@@ -16,10 +16,12 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   return (
     <html lang="en" className={GeistSans.variable}>
       <body className="bg-neutral-50 text-black selection:bg-teal-300 dark:bg-gray-950 dark:text-white dark:selection:bg-pink-600 dark:selection:text-white">
-        <div className="bg-white z-50 dark:bg-black text-black dark:text-white border-b border-gray-700 text-center py-2">
+      <div className='sticky top-0 z-50'>
+        <div className="relative bg-white dark:bg-pink-900 text-black dark:text-white border-b border-gray-700 text-center py-2 bg-gradient-multi bg-[length:800%_800%] animate-gradient-bg">
           🚚 (NL) Free Shipping on Orders Over €50! Shop now and enjoy complimentary shipping.
         </div>
         <Navbar />
+      </div>
         <Suspense>
           <main className='relative'>{children}</main>
         </Suspense>

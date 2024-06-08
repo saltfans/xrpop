@@ -9,6 +9,12 @@ module.exports = {
         sans: ['var(--font-geist-sans)']
       },
       keyframes: {
+        'gradient-bg': {
+          '0%': { 'background-position': '0% 50%' },
+          '50%': { 'background-position': '100% 50%' },
+          '100%': { 'background-position': '0% 50%' },
+        },
+
         fadeIn: {
           from: { opacity: 0 },
           to: { opacity: 1 }
@@ -24,10 +30,16 @@ module.exports = {
         }
       },
       animation: {
+        'gradient-bg': 'gradient-bg 15s ease infinite',
         fadeIn: 'fadeIn .3s ease-in-out',
         carousel: 'marquee 60s linear infinite',
         blink: 'blink 1.4s both infinite'
-      }
+      },
+      backgroundImage: {
+        'gradient-multi': 'linear-gradient(270deg, #1f1c2c, #0e0275, #6a0572, #000000, #434343)',
+      },
+      
+      
     }
   },
   future: {
