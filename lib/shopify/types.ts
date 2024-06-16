@@ -81,6 +81,8 @@ export type ProductVariant = {
     value: string;
   }[];
   price: Money;
+  compareAtPrice?: Money;
+
 };
 
 export type SEO = {
@@ -112,6 +114,7 @@ export type ShopifyProduct = {
   id: string;
   handle: string;
   availableForSale: boolean;
+  compareAtPrice?: Money; 
   title: string;
   description: string;
   descriptionHtml: string;

@@ -23,10 +23,14 @@ export function ProductDescription({ product }: { product: Product }) {
 
   const handleVariantChange = (variant: ProductVariant) => {
     setSelectedVariant(variant);
+    console.log("Variant selected:", variant);
   };
 
   const variantPrice = selectedVariant?.price.amount ?? product.priceRange.minVariantPrice.amount;
-  
+  const compareAtPrice = selectedVariant?.compareAtPrice?.amount;
+
+  console.log("jkj", variantPrice);
+  console.log("compareatprice:", compareAtPrice);
   return (
     <>
       <div className="mb-6 flex flex-col border-b pb-6 dark:border-neutral-700">
@@ -34,7 +38,7 @@ export function ProductDescription({ product }: { product: Product }) {
         <div className="mr-auto w-auto rounded-full bg-cyan-600 p-2 text-sm text-white">
           <Price
             amount={variantPrice}
-           
+            compareAtAmount={compareAtPrice}  
             sale={product.availableForSale}
             currencyCode={product.priceRange.maxVariantPrice.currencyCode}
           />
