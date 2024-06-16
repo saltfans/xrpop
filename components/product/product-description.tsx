@@ -23,11 +23,10 @@ export function ProductDescription({ product }: { product: Product }) {
 
   const handleVariantChange = (variant: ProductVariant) => {
     setSelectedVariant(variant);
-    console.log("Variant selected:", variant);
   };
 
   const variantPrice = selectedVariant?.price.amount ?? product.priceRange.minVariantPrice.amount;
-  console.log("jkj", variantPrice)
+  
   return (
     <>
       <div className="mb-6 flex flex-col border-b pb-6 dark:border-neutral-700">
