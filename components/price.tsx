@@ -24,31 +24,31 @@ const Price = ({
     'font-semibold',
     className // Additional className passed from props
   )}>
-  <p suppressHydrationWarning={true} className={className}>
-      <span>
-        {new Intl.NumberFormat(undefined, {
-          style: 'currency',
-          currency: currencyCode,
-          currencyDisplay: 'narrowSymbol'
-        }).format(parseFloat(amount))}
-      </span>
-      <span className={clsx('ml-1 inline', currencyCodeClassName)}>{`${currencyCode}`}</span>
-      
-      {compareAtAmount && (
-        <span className="line-through text-red-800 ml-1">
-          {`${new Intl.NumberFormat(undefined, {
+    <p suppressHydrationWarning={true} className={className}>
+        <span>
+          {new Intl.NumberFormat(undefined, {
             style: 'currency',
             currency: currencyCode,
             currencyDisplay: 'narrowSymbol'
-          }).format(parseFloat(compareAtAmount))}`}
+          }).format(parseFloat(amount))}
         </span>
-      )}
-      {sale && (
-        <span className={clsx('text-white ml-1', currencyCodeClassName)}>
-          <CiDiscount1 className='inline-block font-extrabold align-middle text-3xl' />
-        </span>
-      )}
-  </p>
+        <span className={clsx('ml-1 inline', currencyCodeClassName)}>{`${currencyCode}`}</span>
+        
+        {compareAtAmount && (
+          <span className="line-through text-red-800 ml-1">
+            {`${new Intl.NumberFormat(undefined, {
+              style: 'currency',
+              currency: currencyCode,
+              currencyDisplay: 'narrowSymbol'
+            }).format(parseFloat(compareAtAmount))}`}
+          </span>
+        )}
+        {sale && (
+          <span className={clsx('text-white ml-1', currencyCodeClassName)}>
+            <CiDiscount1 className='inline-block text-green-500 font-extrabold align-middle text-3xl' />
+          </span>
+        )}
+    </p>
   </div>
 );
 

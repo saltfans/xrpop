@@ -28,7 +28,7 @@ function ThreeItemGridItem({
           label={{
             position: size === 'full' ? 'bottom' : 'bottom',
             title: item.title as string,
-            amount: item.priceRange.maxVariantPrice.amount,
+            amount: item.priceRange.minVariantPrice.amount,
             currencyCode: item.priceRange.maxVariantPrice.currencyCode
           }}
         />
