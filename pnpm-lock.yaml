@@ -24,6 +24,7 @@ specifiers:
   prettier-plugin-tailwindcss: ^0.5.6
   react: 18.2.0
   react-dom: 18.2.0
+  react-icons: ^5.2.1
   tailwindcss: ^3.3.5
   typescript: 5.2.2
 
@@ -36,6 +37,7 @@ dependencies:
   next: 14.0.0_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-icons: 5.2.1_react@18.2.0
 
 devDependencies:
   '@tailwindcss/container-queries': 0.1.1_tailwindcss@3.4.1
@@ -2745,6 +2747,14 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-icons/5.2.1_react@18.2.0:
+    resolution: {integrity: sha512-zdbW5GstTzXaVKvGSyTaBalt7HSfuK5ovrzlpyiWHAFXndXTdd/1hdDHI4xBM1Mn7YriT6aqESucFl9kEXzrdw==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-is/16.13.1:
