@@ -1,4 +1,4 @@
-'use client';
+
 
 import clsx from 'clsx';
 import { ProductOption, ProductVariant } from 'lib/shopify/types';
@@ -11,13 +11,19 @@ type Combination = {
   [key: string]: string | boolean; // ie. { color: 'Red', size: 'Large', ... }
 };
 
-export function VariantSelector({
-  options,
-  variants
-}: {
+interface VariantSelectorProps {
   options: ProductOption[];
   variants: ProductVariant[];
-}) {
+  selectedVariant?: ProductVariant; // Allow selectedVariant to be undefined
+  onVariantChange: (variant: ProductVariant) => void;
+}
+
+export function VariantSelector({
+  options,
+  variants,
+  selectedVariant,
+  onVariantChange,
+}: VariantSelectorProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -31,11 +37,10 @@ export function VariantSelector({
   const combinations: Combination[] = variants.map((variant) => ({
     id: variant.id,
     availableForSale: variant.availableForSale,
-    // Adds key / value pairs for each variant (ie. "color": "Black" and "size": 'M").
     ...variant.selectedOptions.reduce(
       (accumulator, option) => ({ ...accumulator, [option.name.toLowerCase()]: option.value }),
       {}
-    )
+    ),
   }));
 
   return options.map((option) => (
@@ -45,23 +50,10 @@ export function VariantSelector({
         {option.values.map((value) => {
           const optionNameLowerCase = option.name.toLowerCase();
 
-          // Base option params on current params so we can preserve any other param state in the url.
           const optionSearchParams = new URLSearchParams(searchParams.toString());
-
-          // Update the option params using the current option to reflect how the url *would* change,
-          // if the option was clicked.
           optionSearchParams.set(optionNameLowerCase, value);
           const optionUrl = createUrl(pathname, optionSearchParams);
 
-          // In order to determine if an option is available for sale, we need to:
-          //
-          // 1. Filter out all other param state
-          // 2. Filter out invalid options
-          // 3. Check if the option combination is available for sale
-          //
-          // This is the "magic" that will cross check possible variant combinations and preemptively
-          // disable combinations that are not available. For example, if the color gray is only available in size medium,
-          // then all other sizes should be disabled.
           const filtered = Array.from(optionSearchParams.entries()).filter(([key, value]) =>
             options.find(
               (option) => option.name.toLowerCase() === key && option.values.includes(value)
@@ -73,7 +65,6 @@ export function VariantSelector({
             )
           );
 
-          // The option is active if it's in the url params.
           const isActive = searchParams.get(optionNameLowerCase) === value;
 
           return (
@@ -82,6 +73,17 @@ export function VariantSelector({
               aria-disabled={!isAvailableForSale}
               disabled={!isAvailableForSale}
               onClick={() => {
+                const selectedCombination = combinations.find((combination) =>
+                  filtered.every(([key, value]) => combination[key] === value)
+                );
+                if (selectedCombination) {
+                  const selectedVariant = variants.find(
+                    (variant) => variant.id === selectedCombination.id
+                  );
+                  if (selectedVariant) {
+                    onVariantChange(selectedVariant);
+                  }
+                }
                 router.replace(optionUrl, { scroll: false });
               }}
               title={`${option.name} ${value}${!isAvailableForSale ? ' (Out of Stock)' : ''}`}
@@ -92,7 +94,7 @@ export function VariantSelector({
                   'ring-1 ring-transparent transition duration-300 ease-in-out hover:scale-110 hover:ring-blue-600 ':
                     !isActive && isAvailableForSale,
                   'relative z-10 cursor-not-allowed overflow-hidden bg-neutral-100 text-neutral-500 ring-1 ring-neutral-300 before:absolute before:inset-x-0 before:-z-10 before:h-px before:-rotate-45 before:bg-neutral-300 before:transition-transform dark:bg-neutral-900 dark:text-neutral-400 dark:ring-neutral-700 before:dark:bg-neutral-700':
-                    !isAvailableForSale
+                    !isAvailableForSale,
                 }
               )}
             >
